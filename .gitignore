@@ -40,5 +40,3 @@ extracted/
 *.png
 qq_regression_results.csv
 
-# Executed notebook (keep only source)
-tutorial_executed.ipynb
