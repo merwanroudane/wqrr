@@ -37,6 +37,7 @@ venv/
 extracted/
 
 # Test outputs
-*.png
+/*.png
+!docs/images/*.png
 qq_regression_results.csv
 
