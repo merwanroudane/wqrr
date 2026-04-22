@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wqr"
+version = "1.0.0"
+description = "Wavelet Quantile Regression — A comprehensive Python toolkit for quantile-on-quantile regression, wavelet quantile regression, nonparametric quantile causality, and wavelet quantile mediation/moderation with publication-quality visualizations."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Dr. Merwan Roudane", email = "merwanroudane920@gmail.com"},
+]
+keywords = [
+    "quantile regression",
+    "quantile-on-quantile",
+    "wavelet",
+    "econometrics",
+    "causality",
+    "mediation",
+    "moderation",
+    "time series",
+    "financial econometrics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+dependencies = [
+    "numpy>=1.20",
+    "pandas>=1.3",
+    "scipy>=1.7",
+    "statsmodels>=0.13",
+    "matplotlib>=3.5",
+    "PyWavelets>=1.1",
+]
+
+[project.optional-dependencies]
+plotly = ["plotly>=5.0", "kaleido>=0.2"]
+full = ["plotly>=5.0", "kaleido>=0.2", "seaborn>=0.12", "openpyxl>=3.0"]
+
+[project.urls]
+Homepage = "https://github.com/merwanroudane/wqrr"
+Documentation = "https://github.com/merwanroudane/wqrr"
+Repository = "https://github.com/merwanroudane/wqrr"
+Issues = "https://github.com/merwanroudane/wqrr/issues"
+
+[tool.setuptools.packages.find]
+include = ["wqr*"]

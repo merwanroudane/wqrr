@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environments
+.env
+.venv/
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Archives (source zips)
+*.zip
+*.tar.gz
+
+# Snapshots
+.snapshots/
+
+# Extracted original R/MATLAB sources
+extracted/
+
+# Test outputs
+*.png
+qq_regression_results.csv
+
+# Executed notebook (keep only source)
+tutorial_executed.ipynb
