@@ -47,9 +47,17 @@ def modwt_mra(x, wavelet="sym8", level=None, boundary="periodic"):
     }
     wname = wf_map.get(wavelet, wavelet)
 
+    # pywt.swt requires even-length data — pad if odd
+    padded = False
+    if n % 2 != 0:
+        x = np.append(x, x[-1])
+        padded = True
+
+    n_padded = len(x)
+
     if level is None:
-        level = pywt.swt_max_level(n)
-    level = min(level, pywt.swt_max_level(n))
+        level = pywt.swt_max_level(n_padded)
+    level = min(level, pywt.swt_max_level(n_padded))
 
     # Stationary Wavelet Transform (= MODWT up to normalisation)
     coeffs = pywt.swt(x, wname, level=level, trim_approx=True)
@@ -64,6 +72,12 @@ def modwt_mra(x, wavelet="sym8", level=None, boundary="periodic"):
         details[j] = d / np.sqrt(2)
 
     smooth = smooth / np.sqrt(2)
+
+    # Trim back to original length if we padded
+    if padded:
+        smooth = smooth[:n]
+        for j in range(len(details)):
+            details[j] = details[j][:n]
 
     return details, smooth
 

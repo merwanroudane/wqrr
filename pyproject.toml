@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wqr"
-version = "1.0.0"
+version = "1.0.1"
 description = "Wavelet Quantile Regression — A comprehensive Python toolkit for quantile-on-quantile regression, wavelet quantile regression, nonparametric quantile causality, and wavelet quantile mediation/moderation with publication-quality visualizations."
 readme = "README.md"
 license = {text = "MIT"}

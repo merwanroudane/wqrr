@@ -86,35 +86,61 @@ class CausalityResult:
 
 def _lprq_internal(x_eval, y, h, tau):
     """
-    Local linear quantile regression.
-    Evaluates Q_tau(y | x) at each point in x_eval.
-    """
-    if not HAS_SM:
-        raise ImportError("statsmodels required")
+    Fast local-constant kernel quantile regression.
 
+    Evaluates Q_tau(y | x) at each point in x_eval using
+    Gaussian-kernel-weighted quantiles.  Fully vectorised, avoiding
+    per-observation QuantReg fits.  Processes in chunks to keep memory
+    usage bounded for large samples.
+
+    Parameters
+    ----------
+    x_eval : ndarray   Evaluation points (typically y_{t-1}).
+    y      : ndarray   Response values.
+    h      : float     Bandwidth.
+    tau    : float      Quantile level in (0, 1).
+
+    Returns
+    -------
+    fv : ndarray   Fitted conditional quantile at each x_eval point.
+    dv : ndarray   Zeros (slope not used by the causality test).
+    """
     n = len(x_eval)
-    fv = np.zeros(n)
+    fv = np.full(n, np.nan)
     dv = np.zeros(n)
 
-    for i in range(n):
-        z = x_eval - x_eval[i]
-        w = sp_stats.norm.pdf(z / h)
-        w_sum = w.sum()
-        if w_sum < 1e-10:
-            fv[i] = np.nan
-            dv[i] = np.nan
-            continue
-        w = w / w_sum * n
+    # Sort y once; reorder x_eval accordingly for weights
+    sort_idx = np.argsort(y)
+    sorted_y = y[sort_idx]
 
-        try:
-            X_mat = sm.add_constant(z)
-            model = QuantReg(y, X_mat)
-            res = model.fit(q=tau, max_iter=500, p_tol=1e-4)
-            fv[i] = res.params[0]
-            dv[i] = res.params[1]
-        except Exception:
-            fv[i] = np.nan
-            dv[i] = np.nan
+    # Process in chunks to limit memory (peak ≈ chunk_size × n × 8 bytes)
+    chunk = max(1, min(n, int(500_000_000 / (n * 8))))   # ~500 MB cap
+
+    for start in range(0, n, chunk):
+        end = min(start + chunk, n)
+        batch = x_eval[start:end]                   # (b,)
+
+        # Kernel weights: W[i, j] = K( (batch[i] - x_eval[j]) / h )
+        diff = batch[:, None] - x_eval[None, :]     # (b, n)
+        W = np.exp(-0.5 * (diff / h) ** 2)          # unnormalised Gaussian
+        W_sum = W.sum(axis=1, keepdims=True)
+        W_sum = np.maximum(W_sum, 1e-10)
+        W /= W_sum                                  # (b, n) normalised
+
+        # Re-order weights by y sort
+        W_sorted = W[:, sort_idx]                    # (b, n)
+
+        # Cumulative sum along sorted axis
+        cum_W = np.cumsum(W_sorted, axis=1)          # (b, n)
+
+        # First index where cumulative weight ≥ tau
+        mask = cum_W >= tau                          # (b, n) bool
+        has_match = mask.any(axis=1)
+        j_idx = np.where(has_match,
+                         np.argmax(mask, axis=1),
+                         n - 1)
+
+        fv[start:end] = sorted_y[j_idx]
 
     return fv, dv
 
