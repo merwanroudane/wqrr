@@ -1,0 +1,9 @@
+﻿*.Rcheck/
+*.tar.gz
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+smoke.R
+data-raw/

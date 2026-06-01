@@ -1,0 +1,59 @@
+citHeader("To cite wqrr in publications, please use:")
+
+bibentry(
+  bibtype  = "Manual",
+  title    = "wqrr: Wavelet Quantile Regression Toolbox",
+  author   = person("Merwan", "Roudane",
+                    email = "merwanroudane920@gmail.com"),
+  year     = "2026",
+  note     = "R package version 1.0.0",
+  url      = "https://github.com/merwanroudane/wqrr",
+  textVersion = paste(
+    "Roudane, M. (2026).",
+    "wqrr: Wavelet Quantile Regression Toolbox.",
+    "R package version 1.0.0.",
+    "https://github.com/merwanroudane/wqrr"
+  )
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = paste("Oil Prices, US Stock Return, and the Dependence",
+                   "Between Their Quantiles"),
+  author   = c(person("Nicholas", "Sim"),
+               person("Hongtao",  "Zhou")),
+  journal  = "Journal of Banking and Finance",
+  year     = "2015",
+  volume   = "55",
+  pages    = "1--12",
+  doi      = "10.1016/j.jbankfin.2015.01.013"
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = paste("Do energy efficiency R&D investments and ICT promote",
+                   "environmental sustainability in Sweden?",
+                   "A QQKRLS investigation"),
+  author   = c(person("Tomiwa Sunday", "Adebayo"),
+               person("Oktay", "Ozkan"),
+               person("Bright Sodiq", "Eweade")),
+  journal  = "Journal of Cleaner Production",
+  year     = "2024",
+  volume   = "440",
+  pages    = "140832",
+  doi      = "10.1016/j.jclepro.2024.140832"
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = paste("Does uncertainty move the gold price?",
+                   "New evidence from a nonparametric causality-in-quantiles test"),
+  author   = c(person("Mehmet", "Balcilar"),
+               person("Rangan", "Gupta"),
+               person("Christian", "Pierdzioch")),
+  journal  = "Resources Policy",
+  year     = "2016",
+  volume   = "49",
+  pages    = "74--80",
+  doi      = "10.1016/j.resourpol.2016.04.004"
+)

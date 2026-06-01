@@ -1,0 +1,277 @@
+---
+title: "Introduction to wqrr: Wavelet Quantile Regression Toolbox"
+author: "Dr Merwan Roudane"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to wqrr: Wavelet Quantile Regression Toolbox}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7.5,
+  fig.height = 4.8,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+# Overview
+
+`wqrr` bundles eight estimators that combine the *Maximal Overlap Discrete
+Wavelet Transform* (MODWT) with quantile regression so that you can study
+how the relationship between two (or more) time series changes both
+*across the frequency spectrum* and *across the conditional distribution*.
+All visualisations default to the **MATLAB Parula** colour map.
+
+| Function | Method |
+|---|---|
+| `wavelet_qr()` | Wavelet Quantile Regression — band-by-quantile slopes |
+| `multivariate_wqr()` | Multivariate WQR — multiple regressors per band |
+| `wavelet_qqr()` | Wavelet QQR — (θ, τ) coefficient and p-value surfaces |
+| `np_quantile_causality()` | Nonparametric Causality-in-Quantiles |
+| `wavelet_np_causality()` | Wavelet variant of the above |
+| `wavelet_mediation()` | Direct, interaction, paths a / b, indirect |
+| `wavelet_quantile_correlation()` | Wavelet Quantile Correlation with CIs |
+| `wavelet_quantile_density()` | Wavelet nonparametric quantile density |
+
+For plain bivariate Quantile-on-Quantile regression please use the
+companion CRAN package **`QuantileOnQuantile`**.
+
+```{r}
+library(wqrr)
+```
+
+# Example data
+
+The package ships a 360-month synthetic dataset of macro-financial
+returns:
+
+```{r}
+dat <- read.csv(system.file("extdata", "wqrr_data.csv", package = "wqrr"))
+str(dat)
+head(dat)
+```
+
+For speed in this vignette we use the last 192 observations.
+
+```{r}
+dat <- tail(dat, 192)
+```
+
+# 1. Wavelet Quantile Regression (WQR)
+
+Decompose `sp500_return` and `oil_return` with the MODWT, aggregate into
+Short / Medium / Long bands, and run a quantile regression at each
+quantile within each band.
+
+```{r}
+wqr_fit <- wavelet_qr(
+  y         = dat$sp500_return,
+  x         = dat$oil_return,
+  quantiles = seq(0.1, 0.9, by = 0.1),
+  wavelet   = "la8",
+  J         = 5,
+  verbose   = FALSE
+)
+print(wqr_fit)
+```
+
+The band x quantile slope matrix:
+
+```{r}
+wqr_to_matrix(wqr_fit)
+```
+
+Pretty heatmap with significance stars (MATLAB Parula default colour
+scale is provided package-wide; for WQR / mediation the *Green-Orange-Red*
+sequential scale is conventional):
+
+```{r, eval = FALSE}
+plot_wqr_heatmap(wqr_fit, colorscale = "Parula")
+```
+
+Or just call `plot()`:
+
+```{r, eval = FALSE}
+plot(wqr_fit)
+```
+
+A formatted coefficient table with stars:
+
+```{r}
+results_table(wqr_fit, digits = 3)
+```
+
+# 2. Multivariate WQR
+
+Same idea but with several regressors in the same QR per band:
+
+```{r}
+mwqr_fit <- multivariate_wqr(
+  y         = dat$sp500_return,
+  X_list    = list(oil = dat$oil_return, epu = dat$epu),
+  quantiles = c(0.10, 0.25, 0.50, 0.75, 0.90),
+  wavelet   = "la8",
+  J         = 5,
+  verbose   = FALSE
+)
+print(mwqr_fit)
+```
+
+```{r, eval = FALSE}
+plot(mwqr_fit, variable = "oil", colorscale = "Parula")
+```
+
+# 3. Wavelet Quantile-on-Quantile Regression (WQQR)
+
+For the *long*-horizon band of the response and predictor, build the
+full (θ, τ) coefficient + p-value surface:
+
+```{r}
+wqqr_fit <- wavelet_qqr(
+  y             = dat$sp500_return,
+  x             = dat$oil_return,
+  quantile_step = 0.10,
+  wavelet       = "la8",
+  J             = 5,
+  band          = "long",
+  verbose       = FALSE
+)
+print(wqqr_fit)
+```
+
+```{r, eval = FALSE}
+plot(wqqr_fit, type = "3d", colorscale = "Parula")
+plot(wqqr_fit, type = "pvalue")
+plot(wqqr_fit, type = "compare")
+```
+
+# 4. Nonparametric Causality-in-Quantiles
+
+Tests whether `oil_return` Granger-causes `sp500_return` in each
+quantile of the conditional distribution, using a Gaussian-kernel
+local-constant quantile estimator and the Song-Whang-Shin statistic
+(standard-normal critical values at 1.96 / 1.645 for 5% / 10%).
+
+```{r}
+cause_fit <- np_quantile_causality(
+  x         = dat$oil_return,
+  y         = dat$sp500_return,
+  test_type = "mean",
+  q         = seq(0.1, 0.9, by = 0.1)
+)
+print(cause_fit)
+```
+
+```{r, eval = FALSE}
+plot(cause_fit)
+```
+
+The wavelet variant (decomposes both series first):
+
+```{r}
+wcr_fit <- wavelet_np_causality(
+  x       = dat$oil_return,
+  y       = dat$sp500_return,
+  q       = seq(0.1, 0.9, by = 0.1),
+  wavelet = "la8",
+  J       = 5,
+  verbose = FALSE
+)
+print(wcr_fit)
+```
+
+```{r, eval = FALSE}
+plot(wcr_fit, colorscale = "Parula")
+```
+
+# 5. Wavelet Quantile Mediation & Moderation
+
+Direct, interaction (moderation), path a, path b, and indirect (a·b)
+effects for the triplet `(sp500_return, oil_return, epu)`:
+
+```{r}
+med_fit <- wavelet_mediation(
+  y         = dat$sp500_return,
+  x         = dat$oil_return,
+  z         = dat$epu,
+  quantiles = c(0.10, 0.25, 0.50, 0.75, 0.90),
+  wavelet   = "la8",
+  J         = 5,
+  dep_name  = "SP500",
+  main_name = "OIL",
+  mod_name  = "EPU",
+  verbose   = FALSE
+)
+print(med_fit)
+```
+
+```{r, eval = FALSE}
+panels <- plot_mediation_panel(med_fit, colorscale = "Parula")
+panels$Direct
+panels$Indirect
+```
+
+# 6. Wavelet Quantile Correlation
+
+Quantile correlation between MODWT detail levels of two series with
+parametric-bootstrap 95% CIs:
+
+```{r}
+wc_fit <- wavelet_quantile_correlation(
+  x         = dat$oil_return,
+  y         = dat$sp500_return,
+  quantiles = c(0.10, 0.25, 0.50, 0.75, 0.90),
+  wavelet   = "la8",
+  J         = 5,
+  n_sim     = 100,
+  verbose   = FALSE
+)
+print(wc_fit)
+head(wc_fit$results)
+```
+
+```{r, eval = FALSE}
+plot(wc_fit, colorscale = "Parula")
+```
+
+# 7. Wavelet Quantile Density Estimation
+
+```{r}
+qd_fit <- wavelet_quantile_density(dat$sp500_return, j0 = 4, bandwidth = 0.15)
+print(qd_fit)
+```
+
+```{r, eval = FALSE}
+plot(qd_fit)
+```
+
+# 8. Colour palettes
+
+```{r}
+wqrr_colorscales(show_preview = TRUE)
+```
+
+The MATLAB Parula colormap is reproduced exactly from MathWorks' 64
+RGB stops:
+
+```{r, fig.height = 1.2}
+op <- par(mar = c(0, 0, 0, 0))
+image(matrix(1:256, ncol = 1), col = parula_colors(256), axes = FALSE)
+par(op)
+```
+
+# References
+
+- Sim, N., Zhou, H. (2015). *Journal of Banking and Finance*, 55, 1-12. <doi:10.1016/j.jbankfin.2015.01.013>
+- Adebayo, T.S., Ozkan, O. (2024). *Journal of Cleaner Production*, 440, 140832. <doi:10.1016/j.jclepro.2024.140832>
+- Balcilar, M., Gupta, R., Pierdzioch, C. (2016). *Resources Policy*, 49, 74-80. <doi:10.1016/j.resourpol.2016.04.004>

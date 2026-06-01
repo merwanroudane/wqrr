@@ -1,0 +1,8 @@
+^cran-comments\.md$
+^README\.md$
+^\.Rbuildignore$
+^\.gitignore$
+^.*\.Rproj$
+^\.Rproj\.user$
+^data-raw$
+^smoke\.R$
