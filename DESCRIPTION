@@ -11,7 +11,7 @@ Authors@R: c(
     person("Hongtao", "Zhou", role = "ctb",
            comment = "Original Quantile-on-Quantile methodology"),
     person("Tomiwa Sunday", "Adebayo", role = "ctb",
-           comment = "Wavelet QR / WQQR methodology"),
+           comment = "Wavelet Quantile Regression methodology"),
     person("Mehmet", "Balcilar", role = "ctb",
            comment = "Nonparametric quantile causality methodology"))
 Description: A comprehensive toolbox for wavelet-domain quantile

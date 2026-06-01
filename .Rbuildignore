@@ -2,7 +2,15 @@
 ^README\.md$
 ^\.Rbuildignore$
 ^\.gitignore$
+^\.git$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
 ^smoke\.R$
+^time_examples\.R$
+^LICENSE$
+^docs$
+^pyproject\.toml$
+^tutorial\.ipynb$
+^tutorial_executed\.ipynb$
+^wqr$
