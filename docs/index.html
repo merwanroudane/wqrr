@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WQR — Wavelet Quantile Regression for Python</title>
+<meta name="description" content="A comprehensive Python library for wavelet-based quantile regression econometrics with publication-quality visualizations. 9 cutting-edge methodologies by Dr. Merwan Roudane.">
+<meta name="keywords" content="quantile regression, wavelet, econometrics, Python, QQ regression, causality, mediation">
+<meta name="author" content="Dr. Merwan Roudane">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>">
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+<div class="nav-inner">
+  <a href="#" class="nav-logo"><div class="logo-icon">W</div> WQR</a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#quickstart">Quick Start</a></li>
+    <li><a href="#api">API</a></li>
+    <li><a href="#author">Author</a></li>
+  </ul>
+  <a href="https://pypi.org/project/wqr/" class="nav-cta" target="_blank">📦 PyPI v1.0.1</a>
+</div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+<div class="hero-content">
+  <div class="hero-badge"><span class="dot"></span> Published on PyPI — v1.0.1</div>
+  <h1>Wavelet Quantile<br><span>Regression</span> for Python</h1>
+  <p>A comprehensive, high-performance Python library providing <strong>9 cutting-edge econometric methodologies</strong> with publication-quality MATLAB-style visualizations, significance testing, and journal-ready LaTeX export.</p>
+  <div class="hero-buttons">
+    <a href="https://pypi.org/project/wqr/" class="btn btn-primary" target="_blank">📦 View on PyPI</a>
+    <a href="https://github.com/merwanroudane/wqrr" class="btn btn-secondary" target="_blank">⭐ GitHub Repository</a>
+  </div>
+  <div class="hero-install">
+    <span class="prompt">$</span>
+    <code>pip install wqr</code>
+    <button class="copy-btn" onclick="navigator.clipboard.writeText('pip install wqr')" title="Copy">📋</button>
+  </div>
+</div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<div class="container">
+<div class="stats-banner reveal">
+  <div class="stat-item"><div class="stat-number">9</div><div class="stat-label">Econometric Methods</div></div>
+  <div class="stat-item"><div class="stat-number">13</div><div class="stat-label">Plot Functions</div></div>
+  <div class="stat-item"><div class="stat-number">v1.0.1</div><div class="stat-label">PyPI Release</div></div>
+  <div class="stat-item"><div class="stat-number">MIT</div><div class="stat-label">Open Source</div></div>
+</div>
+</div>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="section" id="features">
+<div class="section-header reveal">
+  <span class="section-tag">Capabilities</span>
+  <h2>Nine Econometric Methodologies</h2>
+  <p>Migrated from R/MATLAB — unifying QuantileOnQuantile, wqc, nonParQuantileCausality and MATLAB toolboxes into one Python framework.</p>
+</div>
+<div class="features-grid">
+<div class="feature-card reveal">
+<div class="feature-icon">🔬</div>
+<h3>Quantile-on-Quantile Regression</h3><p>Examines dependence between quantiles of two variables using the Sim & Zhou (2015) methodology.</p><div class="ref">Sim & Zhou (2015)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">🌊</div>
+<h3>Wavelet Quantile Regression</h3><p>MODWT decomposition + quantile regression across Short/Medium/Long frequency bands.</p><div class="ref">Adebayo & Ozkan (2023)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">📐</div>
+<h3>Multivariate WQR</h3><p>Extends WQR to multiple regressors — estimate each variable's effect across quantiles and bands.</p><div class="ref">Adebayo et al. (2025)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">🔮</div>
+<h3>Wavelet QQR with P-values</h3><p>Kernel-weighted local polynomial QR on wavelet components with pointwise significance.</p><div class="ref">Adebayo, Özkan et al. (2025)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">⚡</div>
+<h3>Nonparametric Quantile Causality</h3><p>Balcilar–Jeong–Nishiyama test for Granger causality in mean and variance across quantiles.</p><div class="ref">Balcilar et al. (2016)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">🌊</div>
+<h3>Wavelet NP Quantile Causality</h3><p>Extends causality testing to wavelet-decomposed data at different time horizons.</p><div class="ref">Balcilar et al. (2016)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">🔀</div>
+<h3>Mediation & Moderation</h3><p>Five-path wavelet quantile mediation and moderation analysis.</p><div class="ref">Adebayo (2025)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">🔗</div>
+<h3>Wavelet Quantile Correlation</h3><p>Quantile correlations between wavelet-decomposed series with Monte Carlo CIs.</p><div class="ref">Roudane (2024)</div></div>
+<div class="feature-card reveal">
+<div class="feature-icon">📉</div>
+<h3>Quantile Density Estimation</h3><p>Wavelet-based nonparametric quantile density estimation with thresholding.</p><div class="ref">Chesneau, Dewan & Doosti</div></div>
+
+</div>
+</section>
+
+<!-- ═══ METHODS TABLE ═══ -->
+<section class="section section-alt" id="methods">
+<div class="section-header reveal">
+  <span class="section-tag">Reference</span>
+  <h2>Method Overview</h2>
+  <p>Complete module reference with functions and academic citations.</p>
+</div>
+<div class="method-table-wrap reveal">
+<table class="method-table">
+<thead><tr><th>#</th><th>Module</th><th>Method</th><th>Function</th><th>Reference</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>qq_regression</code></td><td>Quantile-on-Quantile Regression</td><td><code>wqr.qq_regression()</code></td><td>Sim & Zhou (2015)</td></tr>
+<tr><td>2</td><td><code>wavelet_qr</code></td><td>Wavelet Quantile Regression</td><td><code>wqr.wavelet_qr()</code></td><td>Adebayo & Ozkan (2023)</td></tr>
+<tr><td>3</td><td><code>multivariate_wqr</code></td><td>Multivariate WQR</td><td><code>wqr.multivariate_wqr()</code></td><td>Adebayo et al. (2025)</td></tr>
+<tr><td>4</td><td><code>wavelet_qqr</code></td><td>Wavelet QQR + P-values</td><td><code>wqr.wavelet_qqr()</code></td><td>Adebayo, Özkan et al. (2025)</td></tr>
+<tr><td>5</td><td><code>causality</code></td><td>NP Quantile Causality</td><td><code>wqr.np_quantile_causality()</code></td><td>Balcilar et al. (2016)</td></tr>
+<tr><td>6</td><td><code>causality</code></td><td>Wavelet NP Causality</td><td><code>wqr.wavelet_np_causality()</code></td><td>Balcilar et al. (2016)</td></tr>
+<tr><td>7</td><td><code>mediation</code></td><td>Mediation & Moderation</td><td><code>wqr.wavelet_mediation()</code></td><td>Adebayo (2025)</td></tr>
+<tr><td>8</td><td><code>correlation</code></td><td>Wavelet Quantile Correlation</td><td><code>wqr.wavelet_quantile_correlation()</code></td><td>Roudane (2024)</td></tr>
+<tr><td>9</td><td><code>quantile_density</code></td><td>Quantile Density Estimation</td><td><code>wqr.wavelet_quantile_density()</code></td><td>Chesneau et al.</td></tr>
+
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section class="section" id="gallery">
+<div class="section-header reveal">
+  <span class="section-tag">Visualization</span>
+  <h2>Output Gallery</h2>
+  <p>All plots are publication-quality (300 DPI) with configurable colormaps. These are real outputs from the tutorial notebook analyzing Oil–Gold–S&amp;P500–USD relationships.</p>
+</div>
+<div class="gallery-grid">
+<div class="gallery-card reveal">
+<img src="images/output_9_0.png" alt="QQ Regression — 3D Surface" loading="lazy">
+<div class="caption"><h4>QQ Regression — 3D Surface</h4><p>MATLAB-style Jet colorscale 3D surface of Oil→S&P500 coefficients</p><span class="func-tag">plot_qq_3d()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_12_0.png" alt="QQ Regression — Heatmap" loading="lazy">
+<div class="caption"><h4>QQ Regression — Heatmap</h4><p>Coefficient heatmap with significance stars (*, **, ***)</p><span class="func-tag">plot_qq_heatmap()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_13_0.png" alt="QQ Regression — Contour" loading="lazy">
+<div class="caption"><h4>QQ Regression — Contour</h4><p>Filled contour plot with isolines</p><span class="func-tag">plot_qq_contour()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_14_0.png" alt="QQ Regression — Correlation" loading="lazy">
+<div class="caption"><h4>QQ Regression — Correlation</h4><p>Quantile-by-quantile correlation matrix</p><span class="func-tag">plot_correlation_heatmap()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_15_0.png" alt="Data Visualization" loading="lazy">
+<div class="caption"><h4>Data Visualization</h4><p>Time series of Oil, Gold, S&P 500, USD</p><span class="func-tag">matplotlib</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_16_0.png" alt="Return Distributions" loading="lazy">
+<div class="caption"><h4>Return Distributions</h4><p>Histogram and density of financial returns</p><span class="func-tag">matplotlib</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_20_0.png" alt="WQR — Band Heatmap" loading="lazy">
+<div class="caption"><h4>WQR — Band Heatmap</h4><p>Wavelet Quantile Regression across Short/Medium/Long bands</p><span class="func-tag">plot_wqr_heatmap()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_25_0.png" alt="MWQR — Multivariate Heatmap" loading="lazy">
+<div class="caption"><h4>MWQR — Multivariate Heatmap</h4><p>Multivariate WQR band×quantile heatmap</p><span class="func-tag">plot_wqr_heatmap()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_29_0.png" alt="WQQR — 3D Surface" loading="lazy">
+<div class="caption"><h4>WQQR — 3D Surface</h4><p>Wavelet QQR coefficient surface with p-values</p><span class="func-tag">plot_wqqr_surface()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_30_0.png" alt="WQQR — P-value Heatmap" loading="lazy">
+<div class="caption"><h4>WQQR — P-value Heatmap</h4><p>Binary significance grid at α=0.05</p><span class="func-tag">plot_wqqr_pvalue_heatmap()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_31_0.png" alt="WQR vs WQQR Comparison" loading="lazy">
+<div class="caption"><h4>WQR vs WQQR Comparison</h4><p>Line comparison of WQR and WQQR coefficients</p><span class="func-tag">plot_wqr_vs_wqqr()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_34_0.png" alt="Causality — Mean Test" loading="lazy">
+<div class="caption"><h4>Causality — Mean Test</h4><p>Test statistic vs critical value across quantiles</p><span class="func-tag">plot_causality()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_36_0.png" alt="Causality — Variance Test" loading="lazy">
+<div class="caption"><h4>Causality — Variance Test</h4><p>Risk spillover causality test</p><span class="func-tag">plot_causality()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_37_0.png" alt="Causality — Combined Panel" loading="lazy">
+<div class="caption"><h4>Causality — Combined Panel</h4><p>Mean and variance causality side by side</p><span class="func-tag">plot_causality()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_40_0.png" alt="Wavelet Causality Heatmap" loading="lazy">
+<div class="caption"><h4>Wavelet Causality Heatmap</h4><p>Causality across wavelet scales and quantiles</p><span class="func-tag">plot_wavelet_causality()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_44_0.png" alt="Mediation — 5-Panel" loading="lazy">
+<div class="caption"><h4>Mediation — 5-Panel</h4><p>Direct, interaction, path a, path b, indirect effects</p><span class="func-tag">plot_mediation_panel()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_47_0.png" alt="WQC — Correlation Heatmap" loading="lazy">
+<div class="caption"><h4>WQC — Correlation Heatmap</h4><p>Wavelet quantile correlation with CI borders</p><span class="func-tag">plot_wqc_heatmap()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_51_0.png" alt="Quantile Density — 4-Panel" loading="lazy">
+<div class="caption"><h4>Quantile Density — 4-Panel</h4><p>Linear, thresholded, smoothed wavelet density estimates</p><span class="func-tag">plot_quantile_density()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_52_1.png" alt="Quantile Density — Custom" loading="lazy">
+<div class="caption"><h4>Quantile Density — Custom</h4><p>Quantile density with GLD reference</p><span class="func-tag">plot_quantile_density()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_57_1.png" alt="Multi-pair QQ Analysis" loading="lazy">
+<div class="caption"><h4>Multi-pair QQ Analysis</h4><p>Multiple asset pairs QQ regression comparison</p><span class="func-tag">plot_qq_3d()</span></div></div>
+<div class="gallery-card reveal">
+<img src="images/output_58_0.png" alt="Custom Colormap Gallery" loading="lazy">
+<div class="caption"><h4>Custom Colormap Gallery</h4><p>Multiple colormap options for QQ surfaces</p><span class="func-tag">plot_qq_heatmap()</span></div></div>
+
+</div>
+</section>
+
+<!-- ═══ QUICK START ═══ -->
+<section class="section section-alt" id="quickstart">
+<div class="section-header reveal">
+  <span class="section-tag">Get Started</span>
+  <h2>Quick Start</h2>
+  <p>Get up and running in under a minute.</p>
+</div>
+<div class="reveal" style="max-width:800px;margin:0 auto;">
+<div class="code-block">
+<span class="lang-label">python</span>
+<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> wqr
+
+<span class="cm"># Generate sample data</span>
+np.random.seed(<span class="num">42</span>)
+n = <span class="num">300</span>
+x = np.random.normal(size=n)
+y = <span class="num">0.5</span> * x + np.random.normal(scale=<span class="num">0.5</span>, size=n)
+
+<span class="cm"># ── Quantile-on-Quantile Regression ──</span>
+result = wqr.<span class="fn">qq_regression</span>(y, x)
+result.<span class="fn">summary</span>()
+
+<span class="cm"># Publication-quality visualizations</span>
+fig, ax = wqr.<span class="fn">plot_qq_3d</span>(result, colormap=<span class="str">"jet"</span>)
+fig, ax = wqr.<span class="fn">plot_qq_heatmap</span>(result, colormap=<span class="str">"jet"</span>)
+fig, ax = wqr.<span class="fn">plot_qq_contour</span>(result)
+
+<span class="cm"># Export LaTeX table</span>
+latex = result.<span class="fn">export_latex</span>()
+<span class="fn">print</span>(latex)</pre>
+</div>
+
+<h3 style="margin:2rem 0 1rem;font-size:1.1rem;">Installation Options</h3>
+<div class="code-block">
+<span class="lang-label">bash</span>
+<pre><span class="cm"># Basic install</span>
+pip install wqr
+
+<span class="cm"># With interactive Plotly support</span>
+pip install wqr[plotly]
+
+<span class="cm"># Full install (plotly + seaborn + openpyxl)</span>
+pip install wqr[full]
+
+<span class="cm"># From source</span>
+git clone https://github.com/merwanroudane/wqrr.git
+cd wqrr && pip install -e .</pre>
+</div>
+</div>
+</section>
+
+<!-- ═══ API REFERENCE ═══ -->
+<section class="section" id="api">
+<div class="section-header reveal">
+  <span class="section-tag">Documentation</span>
+  <h2>API Reference</h2>
+  <p>Complete function reference for all estimation, plotting, and table utilities.</p>
+</div>
+<div style="max-width:900px;margin:0 auto;">
+<div class="api-group reveal">
+  <div class="api-group-title">Core Estimation Functions</div>
+  <div class="api-item"><code>wqr.qq_regression(y, x, ...)</code><span class="api-desc">Quantile-on-Quantile regression → <span class="api-returns">QQResult</span></span></div>
+<div class="api-item"><code>wqr.wavelet_qr(y, x, ...)</code><span class="api-desc">Wavelet quantile regression → <span class="api-returns">WQRResult</span></span></div>
+<div class="api-item"><code>wqr.multivariate_wqr(y, X_dict, ...)</code><span class="api-desc">Multivariate wavelet QR → <span class="api-returns">MWQRResult</span></span></div>
+<div class="api-item"><code>wqr.wavelet_qqr(y, x, ...)</code><span class="api-desc">Wavelet QQR with p-values → <span class="api-returns">WQQRResult</span></span></div>
+<div class="api-item"><code>wqr.np_quantile_causality(x, y, ...)</code><span class="api-desc">NP quantile causality → <span class="api-returns">CausalityResult</span></span></div>
+<div class="api-item"><code>wqr.wavelet_np_causality(x, y, ...)</code><span class="api-desc">Wavelet NP causality → <span class="api-returns">WaveletCausalityResult</span></span></div>
+<div class="api-item"><code>wqr.wavelet_mediation(y, x, z, ...)</code><span class="api-desc">Mediation & moderation → <span class="api-returns">MediationResult</span></span></div>
+<div class="api-item"><code>wqr.wavelet_quantile_correlation(x, y, ...)</code><span class="api-desc">Wavelet quantile correlation → <span class="api-returns">WQCResult</span></span></div>
+<div class="api-item"><code>wqr.wavelet_quantile_density(y, ...)</code><span class="api-desc">Quantile density estimation → <span class="api-returns">QuantileDensityResult</span></span></div>
+
+</div>
+<div class="api-group reveal">
+  <div class="api-group-title">Plotting Functions</div>
+  <div class="api-item"><code>wqr.plot_qq_3d(result, ...)</code><span class="api-desc">3D surface of QQ coefficients</span></div>
+<div class="api-item"><code>wqr.plot_qq_heatmap(result, ...)</code><span class="api-desc">Heatmap with significance stars</span></div>
+<div class="api-item"><code>wqr.plot_qq_contour(result, ...)</code><span class="api-desc">Filled contour plot</span></div>
+<div class="api-item"><code>wqr.plot_wqr_heatmap(df, ...)</code><span class="api-desc">WQR/MWQR band heatmap</span></div>
+<div class="api-item"><code>wqr.plot_wqqr_surface(result, ...)</code><span class="api-desc">WQQR 3D surface</span></div>
+<div class="api-item"><code>wqr.plot_wqqr_pvalue_heatmap(result, ...)</code><span class="api-desc">P-value significance map</span></div>
+<div class="api-item"><code>wqr.plot_wqr_vs_wqqr(result, ...)</code><span class="api-desc">WQR vs WQQR comparison</span></div>
+<div class="api-item"><code>wqr.plot_causality(result, ...)</code><span class="api-desc">Causality test statistic plot</span></div>
+<div class="api-item"><code>wqr.plot_wavelet_causality(result, ...)</code><span class="api-desc">Wavelet causality heatmap</span></div>
+<div class="api-item"><code>wqr.plot_correlation_heatmap(y, x, ...)</code><span class="api-desc">Quantile correlation matrix</span></div>
+<div class="api-item"><code>wqr.plot_wqc_heatmap(result, ...)</code><span class="api-desc">WQC heatmap with CI borders</span></div>
+<div class="api-item"><code>wqr.plot_quantile_density(result, ...)</code><span class="api-desc">4-panel density estimation</span></div>
+<div class="api-item"><code>wqr.plot_mediation_panel(result, ...)</code><span class="api-desc">5-panel mediation/moderation</span></div>
+
+</div>
+<div class="api-group reveal">
+  <div class="api-group-title">Table Functions</div>
+  <div class="api-item"><code>wqr.results_table(df, ...)</code><span class="api-desc">Formatted table with significance stars</span></div>
+  <div class="api-item"><code>wqr.export_latex(df, ...)</code><span class="api-desc">Journal-ready LaTeX table</span></div>
+  <div class="api-item"><code>wqr.summary_statistics(data, ...)</code><span class="api-desc">Descriptive statistics (mean, std, skew, kurt)</span></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ DEPENDENCIES ═══ -->
+<section class="section section-alt">
+<div class="section-header reveal">
+  <span class="section-tag">Requirements</span>
+  <h2>Dependencies</h2>
+</div>
+<div class="method-table-wrap reveal" style="max-width:700px;margin:0 auto;">
+<table class="method-table">
+<thead><tr><th>Package</th><th>Version</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>numpy</code></td><td>≥ 1.20</td><td>Array computations</td></tr>
+<tr><td><code>pandas</code></td><td>≥ 1.3</td><td>DataFrames & table export</td></tr>
+<tr><td><code>scipy</code></td><td>≥ 1.7</td><td>Statistical distributions</td></tr>
+<tr><td><code>statsmodels</code></td><td>≥ 0.13</td><td>Quantile regression engine</td></tr>
+<tr><td><code>matplotlib</code></td><td>≥ 3.5</td><td>Publication-quality plots</td></tr>
+<tr><td><code>PyWavelets</code></td><td>≥ 1.1</td><td>MODWT wavelet decomposition</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══ CITATION ═══ -->
+<section class="section">
+<div class="section-header reveal">
+  <span class="section-tag">Academic</span>
+  <h2>Citation</h2>
+  <p>If you use <code>wqr</code> in academic research, please cite:</p>
+</div>
+<div class="code-block reveal" style="max-width:700px;margin:0 auto;">
+<span class="lang-label">bibtex</span>
+<pre>@software{roudane2025wqr,
+  author    = {Roudane, Merwan},
+  title     = {WQR: Wavelet Quantile Regression for Python},
+  year      = {2025},
+  publisher = {PyPI},
+  url       = {https://pypi.org/project/wqr/},
+  version   = {1.0.1}
+}</pre>
+</div>
+</section>
+
+<!-- ═══ AUTHOR ═══ -->
+<section class="section section-alt" id="author">
+<div class="section-header reveal">
+  <span class="section-tag">Author</span>
+  <h2>About the Developer</h2>
+</div>
+<div class="author-section reveal">
+  <div class="author-avatar">MR</div>
+  <div class="author-info">
+    <h3>Dr. Merwan Roudane</h3>
+    <div class="title">Econometrician & Research Software Developer</div>
+    <div class="author-links">
+      <a href="mailto:merwanroudane920@gmail.com" class="author-link">📧 Email</a>
+      <a href="https://github.com/merwanroudane" class="author-link" target="_blank">🔗 GitHub</a>
+      <a href="https://pypi.org/project/wqr/" class="author-link" target="_blank">📦 PyPI</a>
+      <a href="https://github.com/merwanroudane/wqrr" class="author-link" target="_blank">📂 Repository</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ REFERENCES ═══ -->
+<section class="section" id="references">
+<div class="section-header reveal">
+  <span class="section-tag">Literature</span>
+  <h2>References</h2>
+</div>
+<div style="max-width:800px;margin:0 auto;font-size:0.9rem;color:var(--text-secondary);line-height:1.9;" class="reveal">
+<ol style="padding-left:1.25rem;">
+<li><strong>Sim, N. & Zhou, H. (2015).</strong> <em>Oil prices, US stock return, and the dependence between their quantiles.</em> J. Banking & Finance, 55, 1–12.</li>
+<li><strong>Balcilar, M., Gupta, R. & Pierdzioch, C. (2016).</strong> <em>Does uncertainty move the gold price?</em> Resources Policy, 49, 74–80.</li>
+<li><strong>Song, K., Whang, Y.-J. & Shin, Y. (2012).</strong> <em>Testing distributional treatment effects.</em> Econometric Reviews.</li>
+<li><strong>Adebayo, T. S. & Ozkan, O. (2023).</strong> <em>Investigating the influence of socioeconomic conditions on the environment using WQR.</em> J. Cleaner Production.</li>
+<li><strong>Adebayo, T. S. et al. (2025).</strong> <em>Unpacking policy ambiguities in renewable energy adoption: MWQR analysis.</em> Applied Economics.</li>
+<li><strong>Adebayo, T. S., Özkan, O. et al. (2025).</strong> <em>Environmental Sciences Europe.</em></li>
+<li><strong>Adebayo, T. S. (2025).</strong> <em>Can ESG Uncertainty Alter the Emissions Impact?</em> Statistical Journal of the IAOS.</li>
+<li><strong>Chesneau, C., Dewan, I. & Doosti, H.</strong> <em>Nonparametric estimation of the quantile density function by wavelet methods.</em></li>
+<li><strong>Roudane, M. (2024).</strong> <em>QuantileOnQuantile & wqc: R packages.</em> CRAN.</li>
+</ol>
+</div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+<div class="footer-inner">
+  <div class="footer-links">
+    <a href="https://pypi.org/project/wqr/">PyPI</a>
+    <a href="https://github.com/merwanroudane/wqrr">GitHub</a>
+    <a href="mailto:merwanroudane920@gmail.com">Contact</a>
+    <a href="https://github.com/merwanroudane/wqrr/blob/main/LICENSE">MIT License</a>
+  </div>
+  <div class="copyright">© 2025 Dr. Merwan Roudane — WQR: Wavelet Quantile Regression for Python v1.0.1</div>
+</div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 500);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
